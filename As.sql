@@ -1,81 +1,23 @@
-CREATE TABLE students (
-    id INT PRIMARY KEY,
-    name VARCHAR(50),
-    age INT
-);
+DROP TABLE IF EXISTS Students;
 
-INSERT INTO students (id, name, age) VALUES
-(1, 'Alice', 19),
-(2, 'Bob', 21),
-(3, 'Charlie', 18),
-(4, 'David', 22),
-(5, 'Eli', 20),
-(6, 'Mila', 23),
-(7, 'Nora', 23),
-(8, 'Olivia', 24);
+CREATE TABLE Students (
+  ID INT PRIMARY KEY,
+  Name VARCHAR(30),
+  Address VARCHAR(100)
+) ENGINE=InnoDB;
 
--- استرجاع أسماء الطلاب الذين أعمارهم أكبر من متوسط أعمار الطلاب
-SELECT name
-FROM students
-WHERE age > (SELECT AVG(age) FROM students);
+INSERT INTO Students (ID, Name, Address) VALUES
+(1, 'Ali', 'Mosul'),
+(2, 'Sara', 'Baghdad'),
+(3, 'Omar', 'Basra');
 
--- 2. Views
--- للطلاب الذين أعمارهم أكبر من 20
-CREATE VIEW older_student AS
-SELECT id, name, age
-FROM students
-WHERE age > 20;
+SHOW TABLE STATUS LIKE 'Students';
 
--- عرض محتوى الـ view
-SELECT * FROM older_student;
+UPDATE Students
+SET Address = 'Erbil City, Kurdistan Region'
+WHERE ID = 2;
 
--- 3. Indexes
--- إنشاء فهرس للبحث على عمود الاسم
-CREATE INDEX enas ON students(name);
+DELETE FROM Students
+WHERE ID = 3;
 
--- حذف الفهرس
-DROP INDEX enas ON students;
-
-
-
-
-
-
-
--- إنشاء جدول الطلاب
-CREATE TABLE students (
-    id INT PRIMARY KEY,
-    name VARCHAR(50),
-    age INT
-);
-
--- إدخال بيانات تجريبية
-INSERT INTO students (id, name, age) VALUES
-(1, 'Alice', 19),
-(2, 'Bob', 21),
-(3, 'Charlie', 18),
-(4, 'David', 22),
-(5, 'Eli', 20),
-(6, 'Mila', 23),
-(7, 'Nora', 17),
-(8, 'Olivia', 24);
-
--- 1. WHERE: استرجاع الطلاب الذين أعمارهم أكبر من 20
-SELECT * FROM students
-WHERE age > 20;
-
--- 2. BETWEEN: استرجاع الطلاب الذين أعمارهم بين 18 و 25
-SELECT name, age FROM students
-WHERE age BETWEEN 18 AND 25;
-
--- 3. LIKE: البحث عن أسماء الطلاب التي تبدأ بـ A
-SELECT name FROM students
-WHERE name LIKE 'A%';
-
--- البحث في الحروف الثانية والثالثة "li" (أي أسماء تحتوي على li)
-SELECT name FROM students
-WHERE name LIKE '%li%';
-
--- 4. IN: استرجاع الطلاب الذين أعمارهم 18 أو 20 أو 25
-SELECT name, age FROM students
-WHERE age IN (18, 20, 25);
+SHOW TABLE STATUS LIKE 'Students';
