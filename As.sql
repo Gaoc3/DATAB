@@ -1,3 +1,7 @@
+DROP DATABASE IF EXISTS lab_db;
+CREATE DATABASE lab_db CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE lab_db;
+
 DROP TABLE IF EXISTS Students;
 
 CREATE TABLE Students (
