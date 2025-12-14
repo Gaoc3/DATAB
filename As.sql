@@ -17,6 +17,9 @@ INSERT INTO Students (ID, Name, Address) VALUES
 
 SHOW TABLE STATUS LIKE 'Students';
 
+DESCRIBE Students;
+SELECT * FROM Students;
+
 UPDATE Students
 SET Address = 'Erbil City, Kurdistan Region'
 WHERE ID = 2;
@@ -25,3 +28,6 @@ DELETE FROM Students
 WHERE ID = 3;
 
 SHOW TABLE STATUS LIKE 'Students';
+
+DESCRIBE Students;
+SELECT * FROM Students;
