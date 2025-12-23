@@ -1,33 +1,36 @@
-DROP DATABASE IF EXISTS lab_db;
-CREATE DATABASE lab_db CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE lab_db;
+#include <iostream>
+using namespace std;
 
-DROP TABLE IF EXISTS Students;
+int main() {
+    int n;
+    cout << "Enter number of processes: ";
+    cin >> n;
 
-CREATE TABLE Students (
-  ID INT PRIMARY KEY,
-  Name VARCHAR(30),
-  Address VARCHAR(100)
-) ENGINE=InnoDB;
+    int at[n], bt[n], ct[n], tt[n], wt[n];
+    float avgWT = 0, avgTT = 0;
 
-INSERT INTO Students (ID, Name, Address) VALUES
-(1, 'Ali', 'Mosul'),
-(2, 'Sara', 'Baghdad'),
-(3, 'Omar', 'Basra');
+    for (int i = 0; i < n; i++) {
+        cout << "P" << i + 1 << " AT & BT: ";
+        cin >> at[i] >> bt[i];
 
-SHOW TABLE STATUS LIKE 'Students';
+        ct[i] = (i == 0)
+              ? at[i] + bt[i]
+              : max(ct[i - 1], at[i]) + bt[i];
 
-DESCRIBE Students;
-SELECT * FROM Students;
+        tt[i] = ct[i] - at[i];
+        wt[i] = tt[i] - bt[i];
 
-UPDATE Students
-SET Address = 'Erbil City, Kurdistan Region'
-WHERE ID = 2;
+        avgWT += wt[i];
+        avgTT += tt[i];
+    }
 
-DELETE FROM Students
-WHERE ID = 3;
+    cout << "\nP#\tAT\tBT\tCT\tTT\tWT\n";
+    for (int i = 0; i < n; i++)
+        cout << "P" << i + 1 << "\t" << at[i] << "\t" << bt[i]
+             << "\t" << ct[i] << "\t" << tt[i] << "\t" << wt[i] << endl;
 
-SHOW TABLE STATUS LIKE 'Students';
+    cout << "\nAvg WT = " << avgWT / n;
+    cout << "\nAvg TT = " << avgTT / n;
 
-DESCRIBE Students;
-SELECT * FROM Students;
+    return 0;
+}
